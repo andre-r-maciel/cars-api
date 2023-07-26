@@ -5,21 +5,45 @@ const Log = require('../models/Log')
 const getCurrentTime = require('../helpers/getCurrentTime')
 const Fifo = require('../helpers/fifo')
 const externalApi = 'http://api-test.bhut.com.br:3000/api/cars'
+const serverError = 'Erro no servidor'
 
 var car = require('../view/requestCar')
 
 //primeiro serviço
 router.get('/listCars', async (req, res) => {
+  // #swagger.tags = ['Car']
+  // #swagger.description = 'List cars of external API'
+  /* #swagger.responses[200] = {
+      schema: { $ref: "#/definitions/Cars"},
+      description: 'List of cars'
+  }
+  */
+
   try {
     const response = await axios.get(externalApi)
     res.status(200).json(response.data)
   } catch (error) {
-    res.status(500).json({ erro: 'Erro no servidor' })
+    res.status(500).json({ erro: serverError })
   }
 })
 
 //segundo serviço
 router.post('/createCar', async (req, res) => {
+  // #swagger.tags = ['Car']
+  // #swagger.description = 'Post car in external API'
+  /* #swagger.parameters['Car'] = {
+      in: 'body',
+      description: 'Car informations',
+      required: true,
+      schema: { $ref: "#/definitions/Car"}
+  }
+  */
+  /* #swagger.responses[200] = {
+      schema: { $ref: "#/definitions/Log"},
+      description: 'Car created'
+  }
+  */
+
   car = req.body
 
   try {
@@ -43,17 +67,25 @@ router.post('/createCar', async (req, res) => {
 
     res.status(201).json(infoCar)
   } catch (error) {
-    res.status(500).json({ erro: 'Erro no servidor' })
+    res.status(500).json({ erro: serverError })
   }
 })
 
 //terceiro serviço
 router.get('/logs', async (req, res) => {
+  // #swagger.tags = ['Log']
+  // #swagger.description = 'List logs of created cars by this API'
+  /* #swagger.responses[200] = {
+      schema: { $ref: "#/definitions/Logs"},
+      description: 'List of logs'
+  }
+  */
+
   try {
     const log = await Log.find()
     res.status(200).json(log)
   } catch (error) {
-    res.status(500).json({ erro: 'Erro no servidor' })
+    res.status(500).json({ erro: serverError })
   }
 })
 

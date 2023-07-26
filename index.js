@@ -2,6 +2,9 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const swaggerUI = require('swagger-ui-express')
+const swaggerDocument = require('./swagger/swagger.json')
+const apiRoutes = require('./controller/api')
 const error = 'Não foi possível conectar ao banco de dados'
 
 app.use(
@@ -24,6 +27,5 @@ mongoose
   })
   .catch(() => console.log(error))
 
-const apiRoutes = require('./controller/api')
-
 app.use('/api', apiRoutes)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))

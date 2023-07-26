@@ -1,0 +1,186 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Cars API",
+    "description": "Cars API Documentation"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Car",
+      "description": "Endpoints"
+    },
+    {
+      "name": "Log",
+      "description": "Endpoints"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/listCars": {
+      "get": {
+        "tags": [
+          "Car"
+        ],
+        "description": "List cars of external API",
+        "responses": {
+          "200": {
+            "description": "List of cars",
+            "schema": {
+              "$ref": "#/definitions/Cars"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/createCar": {
+      "post": {
+        "tags": [
+          "Car"
+        ],
+        "description": "Post car in external API",
+        "parameters": [
+          {
+            "name": "Car",
+            "in": "body",
+            "description": "Car informations",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Log"
+            },
+            "description": "Car created"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/logs": {
+      "get": {
+        "tags": [
+          "Log"
+        ],
+        "description": "List logs of created cars by this API",
+        "responses": {
+          "200": {
+            "description": "List of logs",
+            "schema": {
+              "$ref": "#/definitions/Logs"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Car": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Toro"
+        },
+        "brand": {
+          "type": "string",
+          "example": "Fiat"
+        },
+        "price": {
+          "type": "string",
+          "example": "95000"
+        },
+        "age": {
+          "type": "number",
+          "example": 2021
+        }
+      }
+    },
+    "Cars": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "64c08d4894a4c4001c3e1d04"
+          },
+          "title": {
+            "type": "string",
+            "example": "Toro"
+          },
+          "brand": {
+            "type": "string",
+            "example": "Fiat"
+          },
+          "price": {
+            "type": "string",
+            "example": "95000"
+          },
+          "age": {
+            "type": "number",
+            "example": 2021
+          }
+        }
+      }
+    },
+    "Logs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "64c08d485d02ede46fe6a820"
+          },
+          "data_hora": {
+            "type": "string",
+            "example": "26/07/2023 0:4:40"
+          },
+          "car_id": {
+            "type": "string",
+            "example": "64c08d4894a4c4001c3e1d04"
+          }
+        }
+      }
+    },
+    "Log": {
+      "type": "object",
+      "properties": {
+        "data_hora": {
+          "type": "string",
+          "example": "26/07/2023 0:4:40"
+        },
+        "car_id": {
+          "type": "string",
+          "example": "64c08d4894a4c4001c3e1d04"
+        }
+      }
+    }
+  }
+}
