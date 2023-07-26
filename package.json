@@ -1,0 +1,28 @@
+{
+  "name": "cars-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js localhost"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andre-r-maciel/cars-api.git"
+  },
+  "keywords": [],
+  "author": "Andre Rodrigues Maciel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andre-r-maciel/cars-api/issues"
+  },
+  "homepage": "https://github.com/andre-r-maciel/cars-api#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.1",
+    "nodemon": "^3.0.1"
+  }
+}
